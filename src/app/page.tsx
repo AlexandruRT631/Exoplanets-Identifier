@@ -4,6 +4,7 @@ import PlanetInput from "@/components/PlanetInput/PlanetInput";
 import { getDefaultInputProps, InputProps, toInputProps } from "@/utils/input-utils";
 import { useState } from "react";
 import { parseCsv, pickCsvFile } from "@/utils/csv-utils";
+import axios from 'axios';
 
 const Home = () => {
   const [input, setInput] = useState<InputProps>(getDefaultInputProps());
@@ -20,8 +21,11 @@ const Home = () => {
   };
 
   const sendInput = async () => {
-    console.log("SENDING INPUT");
-    console.log(input);
+    axios.post('http://127.0.0.1:8000/predict', [
+      input
+    ]).then((response) => {
+      console.log(response.data);
+    });
 
     setInput(getDefaultInputProps());
   }

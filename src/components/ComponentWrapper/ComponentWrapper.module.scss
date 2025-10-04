@@ -1,0 +1,39 @@
+.wrapper {
+  background-color: #101010;
+  border-radius: 8px;
+  border: 1px solid #1f1f1f;
+  padding: 12px;
+
+  details>summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #eaeaea;
+  }
+
+  details>summary::-webkit-details-marker {
+    display: none;
+  }
+
+  details>summary::before {
+    content: "▸";
+    display: inline-block;
+    transform: rotate(0deg);
+    transition: transform 160ms ease;
+    opacity: 0.9;
+  }
+
+  details[open]>summary::before {
+    transform: rotate(90deg);
+  }
+
+  details>div {
+    margin-top: 12px;
+  }
+}

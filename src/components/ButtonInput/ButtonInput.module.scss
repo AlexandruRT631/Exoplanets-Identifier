@@ -1,0 +1,21 @@
+.button {
+  display: flex;
+  flex-direction: column;
+  margin: 12px;
+  background-color: darkblue;
+  padding: 8px;
+  border-radius: 4px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+
+  &:hover {
+    background-color: navy; // hover effect
+  }
+
+  &:active {
+    background-color: #000080; // pressed color
+    transform: scale(0.97); // "pressed in" effect
+  }
+}

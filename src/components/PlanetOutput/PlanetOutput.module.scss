@@ -1,0 +1,12 @@
+.wrapper {
+  margin-bottom: 12px;
+
+  >div[class^="ComponentWrapper"] {
+    background-color: #1f1f1f;
+  }
+
+  details>summary {
+    font-size: 20px;
+    font-weight: 400;
+  }
+}

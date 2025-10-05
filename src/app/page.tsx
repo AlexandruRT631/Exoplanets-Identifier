@@ -5,9 +5,11 @@ import { getDefaultInputProps, InputProps, toInputProps } from "@/utils/input-ut
 import { useState } from "react";
 import { parseCsv, pickCsvFile } from "@/utils/csv-utils";
 import axios from 'axios';
+import PlanetOutput from "@/components/PlanetOutput/PlanetOutput";
 
 const Home = () => {
   const [input, setInput] = useState<InputProps>(getDefaultInputProps());
+  const [output, setOutput] = useState<any[]>([]);
 
   const sendCSV = async () => {
     const file = await pickCsvFile();
@@ -16,19 +18,36 @@ const Home = () => {
     const rows = await parseCsv(file);
     const objects: InputProps[] = rows.map(toInputProps);
 
-    console.log("CSV → InputProps[]:", objects);
+    // await axios.post('http://127.0.0.1:8000/predict', objects)
+    //   .then((response) => {
+    //     setOutput(prev => [...response.data, ...prev]);
+    //     console.log(response.data);
+    //   });
+
+    // const result = JSON.parse(`[{"label_order":["CANDIDATE","CONFIRMED","FALSE POSITIVE"],"probs":[0.01582806371152401,0.9691080451011658,0.015063843689858913],"top_features":[{"abs_attr":0.01565004512667656,"feature":"dur_hr","signed_attr":-0.01565004512667656},{"abs_attr":0.00873872172087431,"feature":"multi_ct","signed_attr":0.00873872172087431},{"abs_attr":0.008201565593481064,"feature":"prad_re","signed_attr":0.008201565593481064},{"abs_attr":0.0072887856513261795,"feature":"met_dex","signed_attr":0.0072887856513261795},{"abs_attr":0.006308966316282749,"feature":"teff_k","signed_attr":0.006308966316282749}],"voi":[{"delta_entropy":0.023426100611686707,"feature":"teq_model_from_aor_k"},{"delta_entropy":0.013259217143058777,"feature":"rho_resid_cgs"},{"delta_entropy":0.011982426047325134,"feature":"star_ct"}]},{"label_order":["CANDIDATE","CONFIRMED","FALSE POSITIVE"],"probs":[0.01582806371152401,0.9691080451011658,0.015063843689858913],"top_features":[{"abs_attr":0.01565004512667656,"feature":"dur_hr","signed_attr":-0.01565004512667656},{"abs_attr":0.00873872172087431,"feature":"multi_ct","signed_attr":0.00873872172087431},{"abs_attr":0.008201565593481064,"feature":"prad_re","signed_attr":0.008201565593481064},{"abs_attr":0.0072887856513261795,"feature":"met_dex","signed_attr":0.0072887856513261795},{"abs_attr":0.006308966316282749,"feature":"teff_k","signed_attr":0.006308966316282749}],"voi":[{"delta_entropy":0.023426100611686707,"feature":"teq_model_from_aor_k"},{"delta_entropy":0.013259217143058777,"feature":"rho_resid_cgs"},{"delta_entropy":0.011982426047325134,"feature":"star_ct"}]}]`);
+    // const currentTime = (new Date()).toISOString();
+    // const resultWithTime = result.map((r: any) => ({ ...r, time: currentTime }));
+    // setOutput(prev => [...resultWithTime, ...prev]);
+
     setInput(objects[0] ?? getDefaultInputProps());
   };
 
   const sendInput = async () => {
-    axios.post('http://127.0.0.1:8000/predict', [
+    await axios.post('http://127.0.0.1:8000/predict', [
       input
     ]).then((response) => {
-      console.log(response.data);
+      const currentTime = (new Date()).toISOString();
+      const result = response.data.map((r: any) => ({ ...r, time: currentTime }));
+      setOutput(prev => [result, ...prev]);
+      console.log(result);
     });
+
+    // setOutput(prev => [...JSON.parse(`[{"label_order":["CANDIDATE","CONFIRMED","FALSE POSITIVE"],"probs":[0.01582806371152401,0.9691080451011658,0.015063843689858913],"top_features":[{"abs_attr":0.01565004512667656,"feature":"dur_hr","signed_attr":-0.01565004512667656},{"abs_attr":0.00873872172087431,"feature":"multi_ct","signed_attr":0.00873872172087431},{"abs_attr":0.008201565593481064,"feature":"prad_re","signed_attr":0.008201565593481064},{"abs_attr":0.0072887856513261795,"feature":"met_dex","signed_attr":0.0072887856513261795},{"abs_attr":0.006308966316282749,"feature":"teff_k","signed_attr":0.006308966316282749}],"voi":[{"delta_entropy":0.023426100611686707,"feature":"teq_model_from_aor_k"},{"delta_entropy":0.013259217143058777,"feature":"rho_resid_cgs"},{"delta_entropy":0.011982426047325134,"feature":"star_ct"}]}]`), ...prev]);
 
     setInput(getDefaultInputProps());
   }
+
+  console.log(output);
 
   return (
     <div style={{
@@ -46,7 +65,7 @@ const Home = () => {
         />
       </ComponentsWrapper>
       <ComponentsWrapper title="Output">
-        <div>WIP</div>
+        <PlanetOutput output={output} />
       </ComponentsWrapper>
     </div>
   )

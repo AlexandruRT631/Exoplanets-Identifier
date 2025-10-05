@@ -1,0 +1,67 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .circles {
+    display: flex;
+    flex-direction: row;
+    max-width: 75vw;
+    gap: 36px;
+
+    >div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+
+      >label {
+        font-size: 20px;
+        color: #afafaf;
+      }
+    }
+
+    /* text */
+    :global(.CircularProgressbar-text) {
+      fill: #afafaf !important;
+      font-size: 0.5vw;
+    }
+
+    /* 1st item */
+    >div:nth-child(1) :global(.CircularProgressbar-path) {
+      stroke: #FF0000 !important;
+    }
+
+    >div:nth-child(1) :global(.CircularProgressbar-trail) {
+      stroke: #222 !important;
+    }
+
+    /* 2nd item */
+    >div:nth-child(2) :global(.CircularProgressbar-path) {
+      stroke: #5DBE3F !important;
+    }
+
+    >div:nth-child(2) :global(.CircularProgressbar-trail) {
+      stroke: #222 !important;
+    }
+
+    /* 3rd item */
+    >div:nth-child(3) :global(.CircularProgressbar-path) {
+      stroke: #79B6EB !important;
+    }
+
+    >div:nth-child(3) :global(.CircularProgressbar-trail) {
+      stroke: #222 !important;
+    }
+
+    /* rounded ends */
+    :global(.CircularProgressbar .CircularProgressbar-path) {
+      stroke-linecap: round;
+    }
+
+    >div:nth-child(1) :global(.CircularProgressbar),
+    >div:nth-child(3) :global(.CircularProgressbar) {
+      width: 10vw;
+    }
+  }
+}

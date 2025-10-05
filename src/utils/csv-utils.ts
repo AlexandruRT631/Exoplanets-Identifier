@@ -18,6 +18,11 @@ export const pickCsvFile = (): Promise<File> =>
       resolve(file);
     };
 
+    picker.oncancel = () => {
+      document.body.removeChild(picker);
+      reject("Error selecting file");
+    };
+
     document.body.appendChild(picker);
     picker.click();
   });

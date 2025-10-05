@@ -6,7 +6,7 @@
   .circles {
     display: flex;
     flex-direction: row;
-    max-width: 75vw;
+    max-width: 75%;
     gap: 36px;
 
     >div {
@@ -24,7 +24,7 @@
     /* text */
     :global(.CircularProgressbar-text) {
       fill: #afafaf !important;
-      font-size: 0.5vw;
+      font-size: 50%;
     }
 
     /* 1st item */
@@ -61,7 +61,17 @@
 
     >div:nth-child(1) :global(.CircularProgressbar),
     >div:nth-child(3) :global(.CircularProgressbar) {
-      width: 10vw;
+      width: 75%;
+    }
+  }
+
+  .data {
+    align-self: flex-start;
+    width: 100%;
+
+    >div[class^="ComponentWrapper"] {
+      margin: 12px;
+      background-color: #2f2f2f;
     }
   }
 }

@@ -25,6 +25,7 @@
     "eslint-config-next": "15.5.4",
     "papaparse": "^5.5.3",
     "react-circular-progressbar": "^2.2.0",
+    "recharts": "^3.2.1",
     "sass": "^1.93.2",
     "tailwindcss": "^4",
     "typescript": "^5"

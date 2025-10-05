@@ -11,7 +11,7 @@ const PlanetOutput = ({ output }: PlanetOutputProps) => {
     <div>
       {output.map((o, i) => (
         <div key={i} className={styles.wrapper}>
-          <ComponentWrapper title={o.time} defaultOpen={i === 0}>
+          <ComponentWrapper title={o.title} open={i === 0}>
             <PlanetOutputItem output={o} />
           </ComponentWrapper>
         </div>

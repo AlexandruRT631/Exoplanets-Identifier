@@ -50,7 +50,7 @@ const PlanetOutputItem = ({ output }: { output: any }) => {
         ))}
       </div>
       <div className={styles.data}>
-        <ComponentWrapper defaultOpen={true} title={"TOP FEATURES"}>
+        <ComponentWrapper open={true} title={"Most significant features according to SHAP"}>
           <div style={{ width: "100%", height: 320 }}>
             <ResponsiveContainer>
               <BarChart
@@ -73,7 +73,7 @@ const PlanetOutputItem = ({ output }: { output: any }) => {
           </div>
         </ComponentWrapper>
 
-        <ComponentWrapper defaultOpen={true} title={"Helpful future readings"}>
+        <ComponentWrapper open={true} title={"Helpful future readings"}>
           <div style={{ width: "100%", height: 320 }}>
             <ResponsiveContainer>
               <BarChart
@@ -96,7 +96,7 @@ const PlanetOutputItem = ({ output }: { output: any }) => {
           </div>
         </ComponentWrapper>
 
-        <ComponentWrapper defaultOpen={false} title={"Original Input"}>
+        <ComponentWrapper open={false} title={"Original Input"}>
           <ul style={{ margin: 0, paddingLeft: 18 }}>
             {Object.entries((output?.originalInput ?? {}) as Partial<Record<keyof InputProps, number | undefined>>)
               .map(([key, val]) => (

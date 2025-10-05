@@ -1,16 +1,27 @@
 import React, { CSSProperties, ReactNode } from "react";
 import styles from "./ComponentWrapper.module.scss";
 
-const ComponentWrapper = ({
-  children,
-  title,
-  defaultOpen = true,
-  style,
-}: React.PropsWithChildren<{ title: ReactNode, defaultOpen?: boolean, style?: CSSProperties }>) => {
+type Props = React.PropsWithChildren<{
+  title: ReactNode;
+  open: boolean;
+  onOpenChange?: (open: boolean) => void;
+  style?: CSSProperties;
+}>;
+
+const ComponentWrapper = ({ children, title, open, onOpenChange, style }: Props) => {
   return React.Children.map(children, (child) => (
     <div className={styles.wrapper} style={style}>
-      <details open={defaultOpen}>
-        <summary>{title}</summary>
+      <details open={open}>
+        <summary
+          onClick={(e) => {
+            if (onOpenChange) {
+              e.preventDefault();
+              onOpenChange(!open);
+            }
+          }}
+        >
+          {title}
+        </summary>
         <div>{child}</div>
       </details>
     </div>

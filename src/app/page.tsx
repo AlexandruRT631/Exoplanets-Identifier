@@ -38,7 +38,7 @@ const Home = () => {
     ]).then((response) => {
       const currentTime = (new Date()).toISOString();
       const result = response.data.map((r: any) => ({ ...r, time: currentTime }));
-      setOutput(prev => [result, ...prev]);
+      setOutput(prev => [...result, ...prev]);
       console.log(result);
     });
 

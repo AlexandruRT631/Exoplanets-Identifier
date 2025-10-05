@@ -22,12 +22,12 @@ const PlanetOutputItem = ({ output }: PlanetOutputItemProps) => {
     <div className={styles.wrapper}>
       <div className={styles.circles}>
         {finalOutput.map(o => (
-          <div key={o.label}>
+          <div key={o?.label}>
             <CircularProgressbar
-              value={o.prob}
-              text={o.label}
+              value={o?.prob}
+              text={o?.label}
             />
-            <label style={{ alignSelf: "center" }}>{o.prob.toFixed(2)} %</label>
+            <label style={{ alignSelf: "center" }}>{o?.prob?.toFixed(2)} %</label>
           </div>
         ))}
       </div>
